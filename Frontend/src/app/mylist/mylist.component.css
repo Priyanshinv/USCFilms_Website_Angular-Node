@@ -1,0 +1,40 @@
+.carousel-caption{
+	display:none;
+	background-image: linear-gradient(rgba(0,0,0,0.6) 8%, rgba(0,0,0,1) 30%);
+	max-width: 100%;
+    width:100%;
+	padding-left: 10%;
+	left:0;
+	text-align:left;
+	position:absolute;
+	bottom:0;
+	
+}
+
+
+:focus {
+    outline:0;
+}
+
+.caption2{
+	display:block;
+}
+
+.imageDiv2{
+	transform: scale(1.05);
+}
+
+.imageDiv:hover .carousel-caption{
+	display: block;
+}
+
+.imageDiv:hover{
+	transform: scale(1.1); 
+}
+
+
+
+
+
+
+

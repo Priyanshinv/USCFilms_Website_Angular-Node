@@ -1,0 +1,29 @@
+<div class="{{containerClass2}}">
+<div class="container" *ngIf="popMovies!=undefined && popMovies.length!=0">
+<br>
+<div class="{{containerClass}} {{colClass2}}">
+<h2 style="color:white;">{{name}}</h2>
+</div><br>
+<div class="container {{removeIndicators}} {{carousel1}}">
+<ngb-carousel #carousel [interval]=false>
+  <ng-template ngbSlide *ngFor="let img of popMovies;">
+  <div class="col-12">
+	<div class="row" >
+	   <div class="{{colClass}} {{imageDiv}} {{containerClass}}"  style="overflow:hidden;padding:15px;text-align:center" *ngFor="let data of img">
+			<button class="stretched-link" (click)="goToWatch(data['id'],data['media_type'])" style="border:none;outline:none;padding:0;margin:0">
+				<div class="{{imageDiv}}" style="overflow:hidden;position:relative;height:{{imageHeight}};">
+					<img *ngIf="data['image']" [src]="data['image']" class="d-block w-100" style="position:relative;height:100%;width:100%">
+					<span class="carousel-caption {{caption2}}" *ngIf="data['title']">{{data['title']}}</span>
+				</div>
+			</button>
+		</div>
+	</div>
+	</div>
+  </ng-template>
+</ngb-carousel>
+</div>
+</div>
+</div>
+
+
+

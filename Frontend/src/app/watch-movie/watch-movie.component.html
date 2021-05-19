@@ -1,0 +1,134 @@
+<br>
+<div class="{{containerClass}}">
+<div class="{{containerClass}} {{widthDesktop}}" style="padding-bottom:10rem;">
+<div style="" class="{{padMobile}}">
+<div class="container" *ngIf="movieDetails!=undefined && movieDetails.length!=0">
+  <div class="row">
+    <div class="{{videoFirstClass}}" style="color:white;">
+      <youtube-player *ngIf="movieVideo!=undefined && movieVideo['key']" videoId="{{movieVideo['key']}}" width="100%" height={{videoHeight}}></youtube-player>
+	</div>
+    <div class="{{videoSecondClass}}">
+      <h1 style="color:white;" *ngIf="movieDetails['title']">{{movieDetails['title']}}</h1>
+	  <div class="font-italic" style="color:#8f98a8;font-size:1.0rem" *ngIf="movieDetails['tagline']">{{movieDetails['tagline']}}</div><br>
+	  <div style="color:#8f98a8;font-size:1.0rem"><span *ngIf="movieDetails['release_date']"> {{movieDetails['release_date']}} </span> <span *ngIf="movieDetails['vote_average']"> | <i class="fas fa-star"></i> {{movieDetails['vote_average']}} </span> <span *ngIf="movieDetails['runtime']"> | {{movieDetails['runtime']}} </span> </div><br>
+	  <div style="color:#8f98a8;font-size:1.0rem" *ngIf="movieDetails['genres']"><span style="color:white;font-weight:bold">Genres:</span> {{movieDetails['genres']}}</div>
+	  <div style="color:#8f98a8;font-size:1.0rem" *ngIf="movieDetails['spoken_languages']"><span style="color:white;font-weight:bold">Spoken Languages:</span> {{movieDetails['spoken_languages']}}</div><br>
+	  <p><button type="button" id="{{buttonid}}" class="btn btn-primary" (click)="addToList($event.target)">{{buttonText}} Watchlist</button></p>
+	  <p><ngb-alert #selfClosingAlert *ngIf="alertMessage" type="{{alertType}}" (closed)="alertMessage = ''">{{ alertMessage }}
+	  </ngb-alert></p>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div *ngIf="movieDetails!=undefined && movieDetails.length!=0">
+<div  class="container text-justify" style="color:#8f98a8;font-size:1.0rem" *ngIf="movieDetails['overview']"><h5 style="color:white">Description</h5>{{movieDetails['overview']}}</div><br>
+<div  class="container" style="color:white"><h5>Share</h5>
+	<a target="_blank" *ngIf="movieDetails!=undefined && movieVideo!=undefined" class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Watch%20{{movieDetails['title']}}&url=https://www.youtube.com/watch?v={{movieVideo['key']}}&hashtags=USC,CSCI571,FightOn">
+	  <i class="fab fa-twitter" style="color:#2a90f7; font-size:2rem;padding-right:1%"></i>
+	</a>
+	<a *ngIf="movieVideo!=undefined" href="https://www.facebook.com/sharer/sharer.php?u=https://www.youtube.com/watch?v={{movieVideo['key']}}" target="_blank">
+	<i class="fab fa-facebook-square" style="color:#0000fa;font-size:2rem;padding-right:1%"></i>
+	</a>
+</div>
+</div>
+<br>
+
+<h2 style="color:white" class="container" *ngIf="movieCast!=undefined && movieCast.length!=0">Full Cast and Crew </h2>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" *ngIf="castDetails!=undefined && castDetails['name']">{{castDetails['name']}}</h4>
+    <button type="button" ngbAutofocus class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+	<div class="container">
+	  <div class="row">
+		<div class="{{firstClass}} {{restrictHeight}}">
+		  <img *ngIf="castDetails!=undefined && castDetails['profile_path']" src="{{castDetails['profile_path']}}" style="position:relative;width:100%;height:100%">
+		</div>
+		<div class="{{secondClass}}">
+		  <div *ngIf="castDetails!=undefined && castDetails['birthday']">Birth: {{castDetails['birthday']}}</div>
+		  <div *ngIf="castDetails!=undefined && castDetails['place_of_birth']">Birth Place: {{castDetails['place_of_birth']}}</div>
+		  <div *ngIf="castDetails!=undefined && castDetails['gender']">Gender: {{castDetails['gender']}}</div>
+		  <div *ngIf="castDetails!=undefined && castDetails['homepage']">Website: <a href="{{castDetails['homepage']}}" target="_blank">{{castDetails['homepage']}}</a></div>
+		  <div *ngIf="castDetails!=undefined && castDetails['known_for_department']">Known For: {{castDetails['known_for_department']}}</div>
+		  <div *ngIf="castDetails!=undefined && castDetails['also_known_as']">Also Known as: {{castDetails['also_known_as']}}</div><br>
+		  <div *ngIf="castDetails!=undefined && castExternalId!=undefined">
+			<a *ngIf="castDetails!=undefined && castExternalId['imdb_id']" href="https://www.imdb.com/name/{{castExternalId['imdb_id']}}" target="_blank"  ngbPopover="View IMDB" triggers="mouseenter:mouseleave"><i class="fab fa-imdb" style="color:#DBA506;font-size:2rem;padding-right:1%"></i></a>
+			<a *ngIf="castDetails!=undefined && castExternalId['instagram_id']" href="https://www.instagram.com/{{castExternalId['instagram_id']}}" target="_blank" ngbPopover="View Instagram" triggers="mouseenter:mouseleave"><i class="fab fa-instagram" style="color: #cd486b;font-size:2rem;padding-right:1%"></i></a>
+			<a *ngIf="castDetails!=undefined && castExternalId['facebook_id']" href="https://www.facebook.com/{{castExternalId['facebook_id']}}" target="_blank" ngbPopover="View Facebook" triggers="mouseenter:mouseleave"><i class="fab fa-facebook-square" style="color:#4267B2;font-size:2rem;padding-right:1%"></i></a>
+			<a *ngIf="castDetails!=undefined && castExternalId['twitter_id']" href="https://www.twitter.com/{{castExternalId['twitter_id']}}" target="_blank" ngbPopover="View Twitter" triggers="mouseenter:mouseleave"><i class="fab fa-twitter" style="color:#1DA1F2; font-size:2rem;padding-right:1%"></i></a>
+		  </div><br>
+		</div>
+		</div>
+	</div>
+	<div class="container" *ngIf="castDetails!=undefined && castDetails['biography']">
+	<h2>Biography</h2>
+	<div>{{castDetails['biography']}}</div>
+  </div>
+  </div>
+</ng-template>
+
+<div class="container-fluid container scrollmenu {{scrollmenu2}}" *ngIf="movieCast!=undefined && movieCast.length!=0">
+   <div class="row flex-nowrap" style="padding-bottom:10px;">
+       <div class="{{cardClass}} text-wrap nopadding text-center" *ngFor="let cast of movieCast;">
+           <div class="card " style="border-radius:5%;overflow: hidden;height:20rem;border:none">
+				<button id="{{cast['id']}}" class="stretched-link" (click)="openModal($event,content)" style="border:none;outline:none;background-color:white;padding:0;margin:0">
+				<div class="card-text">
+					<div>
+						<img src="{{cast['profile_path']}}"  class="img-fluid" id="img{{cast['id']}}" >
+					</div>
+					<div style="position:absolute;bottom:0;background-color:white;width:100%">
+						<div style="font-weight:bold;" *ngIf="cast['name']">{{cast['name']}}</div>
+						<div style="font-weight:bold;">AS</div>
+						<div *ngIf="cast['character']" style="padding-bottom:10px">{{cast['character']}}</div>
+					</div>
+
+				</div>
+				</button>
+			</div>
+       </div>
+   </div>
+</div>
+<br>
+
+<div class="container " *ngIf="movieReviews!=undefined && movieReviews.length!=0">
+<h2 style="color:white">Reviews <span style="color:grey">{{movieReviews.length}}</span> </h2>
+<div class="card" *ngFor="let review of movieReviews;" style="margin-bottom:1rem">
+  <div class="card-body">
+  <div class="row">
+    <div class="{{reviewFirstClass}}">
+			<div *ngIf="review['avatar_path']; then thenBlock else elseBlock"></div>
+			<ng-template #thenBlock><div style="border-radius:50%;display:inline-block;overflow:hidden"><img src="{{review['avatar_path']}}"  style="position:relative;width:100%"></div></ng-template>
+			<ng-template #elseBlock><div style="border-radius:50%;display:inline-block;overflow:hidden"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHnPmUvFLjjmoYWAbLTEmLLIRCPpV_OgxCVA&usqp=CAU" style="position:relative;width:100%"></div></ng-template>
+		</div>
+		<div class="{{reviewSecondClass}}">
+			<div *ngIf="review['author']" style="font-weight:bold;margin-bottom:5px"><span style="font-size:1.5rem">A review created by {{review['author']}}</span> &nbsp;<span class="oval {{toggleOval1}}" style="color:white;white-space: nowrap;padding:4px"><i class="fas fa-star" style="padding-left:1%"></i> <span style="padding-right:1%"> {{review['rating']}}</span></span></div>
+			<span class="oval {{toggleOval2}}" style="color:white;white-space: nowrap;padding:5px"><i class="fas fa-star" style="padding-left:1%"></i> <span style="padding-right:1%"> {{review['rating']}}</span></span>
+			<div *ngIf="review['created_at']" style="color:grey;margin-top:20px">Written by {{review['author']}} on {{ review['created_at'] | date: "MMMM d, y, h:mm:ss a" }}</div>
+			<br>
+			<div class="limitSize" *ngIf="review['content']">{{review['content']}}</div>
+			<br>
+			<a *ngIf="review['url']" target="_blank" href="{{review['url']}}" style="text-decoration: underline;">Read the rest</a>
+		</div>
+		</div>
+  </div>
+</div>
+</div>
+
+</div>
+<br>
+
+<div *ngIf="movieDetails!=undefined && movieDetails.length!=0">
+<app-movie-carousel-component *ngIf="movieDetails['media_type'] && movieDetails['media_type']=='movie'" name="Recommended Movies" movieId="{{movieDetails['id']}}"></app-movie-carousel-component>
+<app-movie-carousel-component *ngIf="movieDetails['media_type'] && movieDetails['media_type']=='movie'" name="Similar Movies" movieId="{{movieDetails['id']}}"></app-movie-carousel-component>
+<app-movie-carousel-component *ngIf="movieDetails['media_type'] && movieDetails['media_type']=='tv'" name="Recommended TV Shows" movieId="{{movieDetails['id']}}"></app-movie-carousel-component>
+<app-movie-carousel-component *ngIf="movieDetails['media_type'] && movieDetails['media_type']=='tv' " name="Similar TV Shows" movieId="{{movieDetails['id']}}"></app-movie-carousel-component>
+</div>
+</div>
+</div>
+

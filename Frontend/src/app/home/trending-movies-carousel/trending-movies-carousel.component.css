@@ -1,0 +1,53 @@
+.carousel-caption{
+	display:none;
+	background-image: linear-gradient(rgba(0,0,0,0.6) 8%, rgba(0,0,0,1) 30%);
+	max-width: 100%;
+    width:100%;
+	padding-left: 10%;
+	left:0;
+	text-align:left;
+	position:absolute;
+	bottom:0;
+	
+}
+
+:focus {
+    outline:0;
+}
+
+.caption2{
+	display:block;
+}
+
+.imageDiv2{
+	transform: scale(1.05);
+}
+
+.imageDiv:hover .carousel-caption{
+	display: block;
+}
+
+.imageDiv:hover img{
+	transform: scale(1.1); 
+}
+
+.imageDivDesktop, .carousel2Desktop{
+	height:20rem;
+}
+
+.imageDivMobile, .carousel2Mobile{
+	height:12rem;
+}
+
+::ng-deep .removeIndicators .carousel-indicators {
+  display: none;
+}
+
+::ng-deep .carousel2 .carousel-control-next{
+  left:90%;
+}
+
+::ng-deep .carousel2 .carousel-control-prev{
+  left:-5%;
+}
+

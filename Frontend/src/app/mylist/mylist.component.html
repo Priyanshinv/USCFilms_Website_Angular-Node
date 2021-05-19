@@ -1,0 +1,30 @@
+<br>
+<div class="container">
+<div *ngIf="idList.length==0; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+<div style="margin-top:3rem">
+<h1 style="color:white;text-align:center">No items found in Watchlist.</h1>
+</div>
+</ng-template>
+<ng-template #elseBlock>
+<div class="container">
+<div class="container {{colClass2}}">
+<h2 style="color:white;margin-bottom:4rem">My WatchList</h2>
+</div>
+<div class="container">
+  <div class="col-12">
+	<div class="row" *ngFor="let list1 of idList" style="margin-bottom:{{marginBottom}};">
+	  <div class="{{colClass}} {{imageDiv}} {{containerClass}}"  style="overflow:hidden;height:{{imageDivHeight}}" *ngFor="let list of list1">
+		<button class="stretched-link" (click)="goToWatch(list['id'],list['title'],list['image'],list['media_type'])" style="border:none;outline:none;padding:0;margin:0">
+		  <div class="{{imageDiv}}" style="overflow:hidden;position:relative;height:{{imageDivHeight}}">
+			<img *ngIf="list['image']" [src]="list['image']" class="d-block w-100" style="position:relative;height:100%;width:100%">
+			<span class="carousel-caption {{caption2}}" *ngIf="list['title']">{{list['title']}}</span>
+		  </div>
+		</button>
+		</div>
+	</div><br>
+	</div>
+</div>
+</div>
+</ng-template>
+</div>

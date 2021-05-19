@@ -1,0 +1,14 @@
+<div class="{{containerClass}}">
+<div class="container {{removeIndicators}} {{imageDiv}} carousel2 {{carouselResponsive}}" style="width:90%;" *ngIf="images!=undefined && images.length!=0">
+<ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+  <ng-template ngbSlide *ngFor="let img of images; index as i">
+    <button class="stretched-link" (click)="goToWatch(img['id'],img['media_type'])" style="border:none;padding:0;margin:0;position:relative;width:100%">
+	  <div class="{{imageDiv}} {{imageDivResponsive}}" style="overflow:hidden;position:relative;width:100%;">
+        <img [src]="img['image']" style="position:relative;width:100%;height:100%" *ngIf="img['image']">
+		<span class="carousel-caption {{caption2}}" *ngIf="img['title']">{{img['title']}}</span>
+		</div>
+      </button>	
+  </ng-template>
+</ngb-carousel>
+</div>
+</div>
